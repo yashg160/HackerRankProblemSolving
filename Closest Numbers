@@ -1,0 +1,34 @@
+#!/bin/python3
+import os
+# Complete the closestNumbers function below.
+def closestNumbers(arr):
+    arr = sorted(arr)
+    diff = abs(arr[0] - arr[1])
+    lst = []
+    i = 0
+    while i < len(arr)-1:
+        abs_diff = abs(arr[i] - arr[i+1])
+        if abs_diff < diff:
+            diff = abs_diff
+        i += 1
+    i = 0
+    while i < len(arr)-1:
+        if abs(arr[i] - arr[i+1]) == diff:
+            lst.append(arr[i])
+            lst.append(arr[i+1])
+        i += 1
+    return lst
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = closestNumbers(arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
